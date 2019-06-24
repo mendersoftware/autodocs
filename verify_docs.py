@@ -4,21 +4,26 @@
 #
 # returns an exit code accordingly
 
-import yaml
 import sys
-errored = False
-yfile = sys.argv[1]
-with open(yfile, 'r') as ymlfile:
-    cfg = yaml.load(ymlfile)
+import yaml
 
-for i in cfg["paths"]:
-    for j in cfg["paths"][i]:
-        k = cfg["paths"][i][j]
+def verify_docs_files(files):
+    errored = False
+    for yfile in files:
+        with open(yfile, 'r') as ymlfile:
+            cfg = yaml.load(ymlfile)
 
-        if "summary" not in k:
-            print "Error: summary missing from Swagger doc in: ", i
-            errored = True
-        if "tags" in k:
-            print "Error: tags exists in, %s, remove it" % (i)
+        for i in cfg["paths"]:
+            for j in cfg["paths"][i]:
+                k = cfg["paths"][i][j]
 
-sys.exit(errored)
+                if "summary" not in k:
+                    print("Error: summary missing from Swagger doc in: %s " % (i))
+                    errored = True
+                if "tags" in k:
+                    print("Error: tags exists in, %s, remove it" % (i))
+
+    return errored
+
+if __name__ == "__main__":
+    sys.exit(verify_docs_files(sys.argv[1:]))
