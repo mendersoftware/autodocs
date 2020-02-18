@@ -3,7 +3,7 @@ try:
 except ImportError:
     from markdown2 import markdown
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import sys
 import re
 import logging
@@ -106,4 +106,4 @@ insertVerticalSeperator()
 replaceEmptyTableCells()
 
 for l in markdownLines:
-    print str(l),
+    print(str(l)),
