@@ -31,9 +31,9 @@ def newPathMarkdown():
     # Converting file to HTML in memory
     md_str = open(markdown_file, "r").read()
     html = markdown(md_str)
-    soup = BeautifulSoup(html)
+    soup = BeautifulSoup(html, 'html.parser')
 
-    for e in soup.findAll("code"):
+    for e in soup.find_all("code"):
         if len(e) == 1 and e.text.startswith(http_methods):
             link = e.findPrevious('a').get("name")
             pathLine = "- [%s](#%s)\n" % (e.text, link)
@@ -106,4 +106,4 @@ insertVerticalSeperator()
 replaceEmptyTableCells()
 
 for l in markdownLines:
-    print(str(l)),
+    print(str(l), end = ''),
