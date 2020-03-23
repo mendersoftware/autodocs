@@ -34,9 +34,11 @@ def newPathMarkdown():
     soup = BeautifulSoup(html, 'html.parser')
 
     for e in soup.find_all("code"):
-        if len(e) == 1 and e.text.startswith(http_methods):
+        logging.info("newPathMarkdown: processing: '%s'" % (e.text))
+        text = ''.join(e.text.split())
+        if len(e) == 1 and text.startswith(http_methods):
             link = e.findPrevious('a').get("name")
-            pathLine = "- [%s](#%s)\n" % (e.text, link)
+            pathLine = "- [%s](#%s)\n" % (text, link)
             logging.info("Adding %s to path block" % (str(pathLine).strip()))
             foundLinks.append(link)
             newPathBlock.append(pathLine)
