@@ -97,6 +97,7 @@ title: %s
 taxonomy:
     category: docs
 api: true
+template: docs
 ---""" % (titleInPrefix))
 
 with open(markdown_file, "r") as f:
