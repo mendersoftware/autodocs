@@ -20,8 +20,6 @@ def verify_docs_files(files):
                 if "summary" not in k:
                     print("Error: summary missing from Swagger doc in: %s " % (i))
                     errored = True
-                if "tags" in k:
-                    print("Error: tags exists in, %s, remove it" % (i))
 
     return errored
 
