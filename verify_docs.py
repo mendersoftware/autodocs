@@ -11,7 +11,7 @@ def verify_docs_files(files):
     errored = False
     for yfile in files:
         with open(yfile, 'r') as ymlfile:
-            cfg = yaml.load(ymlfile)
+            cfg = yaml.load(ymlfile, Loader=yaml.SafeLoader)
 
         for i in cfg["paths"]:
             for j in cfg["paths"][i]:
